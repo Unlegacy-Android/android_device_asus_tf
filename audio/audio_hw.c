@@ -832,7 +832,7 @@ static size_t adev_get_input_buffer_size(const struct audio_hw_device *dev __unu
                                          const struct audio_config *config)
 {
     return get_input_buffer_size(config->sample_rate, config->format,
-                                 popcount(config->channel_mask));
+                                 audio_channel_count_from_out_mask(config->channel_mask));
 }
 
 static int adev_open_input_stream(struct audio_hw_device *dev,
@@ -847,7 +847,7 @@ static int adev_open_input_stream(struct audio_hw_device *dev,
     struct tiny_audio_device *adev = (struct tiny_audio_device *)dev;
     struct tiny_stream_in *in;
     int ret;
-    int channel_count = popcount(config->channel_mask);
+    int channel_count = audio_channel_count_from_out_mask(config->channel_mask);
 
     if (check_input_parameters(config->sample_rate, config->format, channel_count) != 0)
         return -EINVAL;

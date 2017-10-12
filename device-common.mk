@@ -16,7 +16,7 @@
 
 $(call inherit-product, hardware/nvidia/tegra3/tegra3.mk)
 
-PRODUCT_CHARACTERISTICS := tablet,nosdcard
+PRODUCT_CHARACTERISTICS := tablet
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -26,8 +26,8 @@ $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap
 
 # Init files
 PRODUCT_COPY_FILES += \
-    device/asus/grouper/rootdir/init.grouper.usb.rc:root/init.grouper.usb.rc \
-    device/asus/grouper/rootdir/ueventd.grouper.rc:root/ueventd.grouper.rc
+    device/asus/transformer/rootdir/init.transformer.usb.rc:root/init.transformer.usb.rc \
+    device/asus/transformer/rootdir/ueventd.transformer.rc:root/ueventd.transformer.rc
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -52,13 +52,13 @@ PRODUCT_COPY_FILES += \
 
 # Input device configs
 PRODUCT_COPY_FILES += \
-    device/asus/grouper/touchscreen/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \
-    device/asus/grouper/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+    device/asus/transformer/touchscreen/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \
+    device/asus/transformer/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
 # GPS
 PRODUCT_COPY_FILES += \
-    device/asus/grouper/gps/gps.conf:system/etc/gps.conf \
-    device/asus/grouper/gps/gps.xml:system/etc/gps.xml
+    device/asus/transformer/gps/gps.conf:system/etc/gps.conf \
+    device/asus/transformer/gps/gps.xml:system/etc/gps.xml
 
 PRODUCT_PACKAGES += \
     libgpsd-compat \
@@ -82,7 +82,7 @@ PRODUCT_PACKAGES += \
 
 # Sensors
 PRODUCT_COPY_FILES += \
-    device/asus/grouper/sensors/sensors-load-calibration.sh:system/bin/sensors-load-calibration.sh
+    device/asus/transformer/sensors/sensors-load-calibration.sh:system/bin/sensors-load-calibration.sh
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -91,8 +91,8 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default
 
 PRODUCT_COPY_FILES += \
-    device/asus/grouper/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    device/asus/grouper/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+    device/asus/transformer/audio/audio_policy.conf:system/etc/audio_policy.conf \
+    device/asus/transformer/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -117,8 +117,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-    device/asus/grouper/media/media_profiles.xml:system/etc/media_profiles.xml \
-    device/asus/grouper/media/media_codecs.xml:system/etc/media_codecs.xml
+    device/asus/transformer/media/media_profiles.xml:system/etc/media_profiles.xml \
+    device/asus/transformer/media/media_codecs.xml:system/etc/media_codecs.xml
 
 # Vendor blobs
 $(call inherit-product, vendor/asus/grouper/asus-vendor.mk)

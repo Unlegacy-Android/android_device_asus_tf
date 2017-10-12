@@ -14,7 +14,7 @@
 
 include hardware/nvidia/tegra3/BoardConfigCommon.mk
 
-TARGET_BOOTLOADER_BOARD_NAME := cardhu
+TARGET_BOOTLOADER_BOARD_NAME := transformer
 
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -65,7 +65,7 @@ BOARD_CUSTOM_BT_CONFIG := device/asus/transformer/bluetooth/vnd_transformer.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/asus/transformer/bluetooth
 
 # Dump State
-BOARD_HAL_STATIC_LIBRARIES := libdumpstate.grouper
+BOARD_HAL_STATIC_LIBRARIES := libdumpstate.transformer
 
 # Security
 BOARD_SEPOLICY_DIRS += device/asus/transformer/sepolicy

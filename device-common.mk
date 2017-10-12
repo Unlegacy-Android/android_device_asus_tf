@@ -46,10 +46,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
-# File that declares the MIFARE NFC constant
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml
-
 # Input device configs
 PRODUCT_COPY_FILES += \
     device/asus/transformer/touchscreen/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \

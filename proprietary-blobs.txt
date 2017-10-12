@@ -29,7 +29,6 @@
 /system/lib/egl/libEGL_tegra.so
 /system/lib/egl/libGLESv1_CM_tegra.so
 /system/lib/egl/libGLESv2_tegra.so
-/system/lib/hw/camera.tegra3.so
 /system/lib/hw/gps.tegra3.so
 /system/lib/hw/gralloc.tegra3.so
 /system/lib/hw/hwcomposer.tegra3.so

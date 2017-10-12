@@ -20,7 +20,7 @@ $(call inherit-product, device/asus/transformer/device.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
 PRODUCT_NAME   := aosp_transformer
-PRODUCT_DEVICE := TF
-PRODUCT_BRAND  := Asus
-PRODUCT_MODEL  := Asus Transformer TF
+PRODUCT_DEVICE := transformer
+PRODUCT_BRAND  := Transformer
+PRODUCT_MODEL  := TF
 PRODUCT_MANUFACTURER := Asus

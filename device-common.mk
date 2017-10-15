@@ -50,7 +50,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/asus/transformer/touchscreen/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \
 	device/asus/transformer/touchscreen/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \
-    device/asus/transformer/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+    device/asus/transformer/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    device/asus/transformer/keylayout/asusec.kcm:system/usr/keychars/Generic.kcm \
+    device/asus/transformer/keylayout/asusec.kl:system/usr/keylayout/Generic.kl
 
 # GPS
 PRODUCT_COPY_FILES += \

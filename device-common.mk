@@ -74,6 +74,18 @@ PRODUCT_PACKAGES += \
 WIFI_BAND := 802_11_BG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
+# Proprietary
+PRODUCT_COPY_FILES += \
+    device/asus/transformer/proprietary/etc/firmware/BCM43241B0_002.001.013.0056.0081.hcd:etc/firmware/BCM43241B0_002.001.013.0056.0081.hcd \
+    device/asus/transformer/proprietary/etc/firmware/BCM4329B1_002.002.023.0797.0863.hcd:etc/firmware/BCM4329B1_002.002.023.0797.0863.hcd \
+    device/asus/transformer/proprietary/etc/firmware/BCM4329B1_002.002.023.0797.0879.hcd:etc/firmware/BCM4329B1_002.002.023.0797.0879.hcd \
+    device/asus/transformer/proprietary/etc/firmware/BCM4330B1_002.001.003.0379.0390.hcd:etc/firmware/BCM4330B1_002.001.003.0379.0390.hcd \
+    device/asus/transformer/proprietary/etc/firmware/BCM4330B1_002.001.003.0609.0636.hcd:etc/firmware/BCM4330B1_002.001.003.0609.0636.hcd \
+    device/asus/transformer/proprietary/etc/firmware/BCM4330B1_002.001.003.0967.0970.hcd:etc/firmware/BCM4330B1_002.001.003.0967.0970.hcd \
+    device/asus/transformer/proprietary/etc/firmware/BCM4334B0_002.001.013.0258.0306.hcd:etc/firmware/BCM4334B0_002.001.013.0258.0306.hcd \
+    device/asus/transformer/proprietary/vendor/firmware/bcm4329/fw_bcm4329.bin:system/vendor/firmware/fw_bcmdhd.bin \
+    device/asus/transformer/proprietary/vendor/firmware/bcm4329/fw_bcm4329_apsta.bin:system/vendor/firmware/fw_bcmdhd_apsta.bin
+
 # HALs
 PRODUCT_PACKAGES += \
     audio.primary.grouper \
@@ -114,5 +126,5 @@ PRODUCT_COPY_FILES += \
 
 # Vendor blobs
 $(call inherit-product, vendor/asus/grouper/asus-vendor.mk)
-$(call inherit-product, vendor/broadcom/grouper/broadcom-vendor.mk)
+#$(call inherit-product, vendor/broadcom/grouper/broadcom-vendor.mk)
 $(call inherit-product, vendor/invensense/grouper/invensense-vendor.mk)

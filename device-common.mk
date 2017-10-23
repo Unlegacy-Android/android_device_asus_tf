@@ -49,7 +49,9 @@ PRODUCT_COPY_FILES += \
 # Input device configs
 PRODUCT_COPY_FILES += \
     device/asus/transformer/touchscreen/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \
-    device/asus/transformer/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+    device/asus/transformer/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    device/asus/transformer/keylayout/asusdec.kcm:system/usr/keychars/asusdec.kcm \
+    device/asus/transformer/keylayout/asusdec.kl:system/usr/keylayout/asusdec.kl
 
 # GPS
 PRODUCT_COPY_FILES += \

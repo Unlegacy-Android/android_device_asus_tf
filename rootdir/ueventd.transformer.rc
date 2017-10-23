@@ -21,6 +21,9 @@
 /dev/tf_driver  0660    drmrpc	drmrpc
 /dev/ion        0666    system  system
 /dev/timerinfo  0440    system  system
+/dev/touch_debug 0666    system  system
+/dev/touchpanel 0660     system  system
+/dev/elan-iap   0660     system  system
 /dev/cpu_freq_min	0660	system	system
 /dev/cpu_freq_max	0660	system	system
 /dev/min_online_cpus	0660	system	system
@@ -36,6 +39,12 @@
 /dev/video0     0660    media   camera
 /dev/video1     0660    media   camera
 /dev/spdif*     0660    system  audio
+/dev/asusdec    0660    system  system
+/dev/asuspec    0660    system  system
+
+/dev/ttyUSB*    0660    radio    system
+/dev/ttyHS1     0664    root     system
+/dev/ttyHS2     0660    bluetooth   bluetooth
 
 #for FM V4L2 Radio
 /dev/radio      0666    system  radio

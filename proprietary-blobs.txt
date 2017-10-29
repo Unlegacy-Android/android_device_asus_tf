@@ -83,7 +83,6 @@
 /system/lib/libnvwsi.so
 /system/lib/libsensors.lightsensor.so
 /system/lib/libstagefrighthw.so
-/system/vendor/firmware/libpn544_fw.so
 /system/vendor/lib/drm/libdrmwvmplugin.so
 /system/vendor/lib/libwvdrm_L1.so
 /system/vendor/lib/libwvm.so

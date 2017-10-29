@@ -94,13 +94,6 @@ PRODUCT_COPY_FILES += \
     device/asus/transformer/audio/audio_policy.conf:system/etc/audio_policy.conf \
     device/asus/transformer/audio/mixer_paths.xml:system/etc/mixer_paths.xml
 
-# NFC
-PRODUCT_PACKAGES += \
-    nfc.grouper \
-    libpn544_fw \
-    NfcNxp \
-    Tag
-
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     fsck.f2fs \

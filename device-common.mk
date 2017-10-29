@@ -72,7 +72,7 @@ PRODUCT_PACKAGES += \
 	wifimacwriter
 
 WIFI_BAND := 802_11_BG
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 
 # HALs
 PRODUCT_PACKAGES += \

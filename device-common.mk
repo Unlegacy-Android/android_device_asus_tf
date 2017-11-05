@@ -18,8 +18,8 @@ $(call inherit-product, hardware/nvidia/tegra3/tegra3.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
 
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := hdpi
+PRODUCT_AAPT_CONFIG := xlarge
+PRODUCT_AAPT_PREF_CONFIG := mdpi
 
 # Dalvik VM config
 $(call inherit-product, frameworks/native/build/tablet-7in-hdpi-1024-dalvik-heap.mk)

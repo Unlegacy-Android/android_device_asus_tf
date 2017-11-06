@@ -35,13 +35,8 @@
 /system/etc/firmware/touch_fw.ekt
 /system/etc/gps/gpsconfig.xml
 /system/etc/nvcamera.conf
-/system/etc/nvram_ah691.txt
-/system/etc/nvram_murata_4334.txt
-/system/etc/nvram_murata.txt
 /system/etc/nvram_nh615.txt
-/system/etc/nvram_nh660.txt
 /system/etc/nvram_nh665.txt
-/system/etc/nvram_nh669.txt
 /system/lib/egl/libEGL_tegra.so
 /system/lib/egl/libGLESv1_CM_tegra.so
 /system/lib/egl/libGLESv2_tegra.so

@@ -49,7 +49,7 @@ int copy_nvram(char *src) {
     char *mac = NULL;
     char *nvram = NULL;
     char *out = NULL;
-    char dest[] = "/data/misc/wifi/nvram.txt";
+    char dest[] = "/system/etc/nvram.txt";
     char mac_addr[] = "\nmacaddr=\0";
     char over_ride[] = "\nnvram_override=1\n\0";
     int fd = 0;
@@ -104,18 +104,6 @@ int copy_nvram(char *src) {
     sprintf(out, "%s%s%s%s", nvram, mac_addr, mac, over_ride);
 
 write:
-    if (stat("/data/misc", &st) != 0) {
-        SLOGW("Creating directory /data/misc");
-        mkdir("/data/misc", S_IRWXU | S_IRWXG);
-        chown("/data/misc", 1000, 9998);
-    }
-
-    if (stat("/data/misc/wifi", &st) != 0) {
-        SLOGW("Creating directory /data/misc/wifi");
-        mkdir("/data/misc/wifi", S_IRWXU | S_IRWXG);
-        chown("/data/misc/wifi", 1010, 1010);
-    }
-
     fd = open(dest, O_CREAT|O_WRONLY|O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 
     if (fd < 0) {

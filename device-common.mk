@@ -80,7 +80,6 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329
 
 # HALs
 PRODUCT_PACKAGES += \
-    audio.primary.grouper \
     lights.transformer
 
 # Sensors
@@ -94,8 +93,7 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default
 
 PRODUCT_COPY_FILES += \
-    device/asus/transformer/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    device/asus/transformer/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+    device/asus/transformer/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

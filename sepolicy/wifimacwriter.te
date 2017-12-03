@@ -3,3 +3,9 @@ type wifimacwriter, domain;
 type wifimacwriter_exec, exec_type, file_type;
 
 init_daemon_domain(wifimacwriter)
+
+allow wifimacwriter sysfs:file { r_file_perms };
+allow wifimacwriter self:capability { dac_override };
+allow wifimacwriter system_data_file:dir { write add_name remove_name create rmdir mounton };
+allow wifimacwriter property_socket:sock_file { write };
+allow wifimacwriter init:unix_stream_socket { connectto };

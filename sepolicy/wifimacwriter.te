@@ -1,0 +1,7 @@
+# wifimacwriter service
+type wifimacwriter, domain;
+type wifimacwriter_exec, exec_type, file_type;
+
+init_daemon_domain(wifimacwriter)
+
+/system/bin/wifimacwriter   u:object_r:wifimacwriter_exec:s0

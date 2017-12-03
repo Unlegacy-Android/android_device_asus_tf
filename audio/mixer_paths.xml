@@ -42,9 +42,16 @@
     <ctl name="OUT Channel Switch" value="1" />
   </path>
 
-  <path name="builtin-mic">
+  <path name="main-mic-top">
     <ctl name="Int Mic Switch" value="1" />
     <ctl name="DMIC Switch" value="DMIC1" />
+    <ctl name="ADC IF1 SWITCH" value="right copy to left" />
+  </path>
+
+  <path name="main-mic-left">
+    <ctl name="Int Mic Switch" value="1" />
+    <ctl name="DMIC Switch" value="DMIC1" />
+    <ctl name="ADC IF1 SWITCH" value="left copy to right" />
   </path>
 
   <path name="headset-mic">

@@ -1147,6 +1147,8 @@ static int adev_open(const hw_module_t* module, const char* name,
     struct audio_device *adev;
     int ret;
 
+	ALOGI("adev_open start");
+
     if (strcmp(name, AUDIO_HARDWARE_INTERFACE) != 0)
         return -EINVAL;
 
@@ -1182,6 +1184,9 @@ static int adev_open(const hw_module_t* module, const char* name,
     *device = &adev->hw_device.common;
 
     select_devices(adev);
+	
+	ALOGI("adev_open end");
+	
     return 0;
 }
 

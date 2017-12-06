@@ -25,14 +25,18 @@ char* read_file(const char *fn)
     char *data = NULL;
 
     int fd = open(fn, O_RDONLY);
-    if (fd < 0) return data;
+    if (fd < 0) 
+		return data;
 
-    if (fstat(fd, &st)) goto oops;
+    if (fstat(fd, &st)) 
+		goto oops;
 
     data = malloc(st.st_size + 1);
-    if (!data) goto oops;
+    if (!data) 
+		goto oops;
 
-    if (read(fd, data, st.st_size) != st.st_size) goto oops;
+    if (read(fd, data, st.st_size) != st.st_size) 
+		goto oops;
     close(fd);
     data[st.st_size + 1] = 0;
     return data;
@@ -68,27 +72,16 @@ int copy_nvram(char *src) {
         goto exit;
     }
 
-    if (stat("/data/wifimac", &st) != 0 ) {
-        if (mkdir("/data/wifimac", S_IRWXU | S_IRWXG | S_IRWXO) < 0) {
-            SLOGE("Failed to create mount point /data/wifimac %s", strerror(errno));
-            err = 1;
-            goto write;
-        }
-    } else {
-        chown("/data/wifimac", 0, 0);
-        chmod("/data/wifimac", S_IRWXU | S_IRWXG | S_IRWXO);
-    }
-
-    if (mount("/dev/block/mmcblk0p5", "/data/wifimac", "vfat", 0, NULL)) {
-        SLOGE("Failed to mount /data/wifimac %s", strerror(errno));
+    if (mount("/dev/block/mmcblk0p5", "/per", "vfat", 0, NULL)) {
+        SLOGE("Failed to mount /per %s", strerror(errno));
         err = 1;
         goto write;
     }
 
-    mac = read_file("/data/wifimac/wifi_mac");
+    mac = read_file("/per/wifi_mac");
 
     if (!mac) {
-        SLOGE("Failed to read /data/wifimac/wifi_mac %s", strerror(errno));
+        SLOGE("Failed to read /per/wifi_mac %s", strerror(errno));
         err = 1;
         goto write;
     }
@@ -133,8 +126,6 @@ exit:
     if (mac) free(mac);
     if (nvram) free(nvram);
     if (out) free(out);
-    umount("/data/wifimac");
-    rmdir("/data/wifimac");
     return err;
 }
 

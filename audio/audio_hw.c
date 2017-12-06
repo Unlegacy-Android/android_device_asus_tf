@@ -1149,38 +1149,64 @@ static int adev_open(const hw_module_t* module, const char* name,
 
 	ALOGI("adev_open start");
 
-    if (strcmp(name, AUDIO_HARDWARE_INTERFACE) != 0)
+    if (strcmp(name, AUDIO_HARDWARE_INTERFACE) != 0) {
+		ALOGI("AUDIO_HARDWARE_INTERFACE");
         return -EINVAL;
-
+	}
+		
     adev = calloc(1, sizeof(struct audio_device));
-    if (!adev)
+    if (!adev){
+		ALOGI("!adev");
         return -ENOMEM;
+	}
 
     adev->hw_device.common.tag = HARDWARE_DEVICE_TAG;
+	ALOGI("HARDWARE_DEVICE_TAG %s", HARDWARE_DEVICE_TAG);
     adev->hw_device.common.version = AUDIO_DEVICE_API_VERSION_2_0;
+	ALOGI("AUDIO_DEVICE_API_VERSION_2_0 %s", AUDIO_DEVICE_API_VERSION_2_0);
     adev->hw_device.common.module = (struct hw_module_t *) module;
+	ALOGI("hw_device.common.module");
     adev->hw_device.common.close = adev_close;
+	ALOGI("adev_close %s", adev_close);
 
     adev->hw_device.init_check = adev_init_check;
+	ALOGI("adev_init_check %s", adev_init_check);
     adev->hw_device.set_voice_volume = adev_set_voice_volume;
+	ALOGI("adev_set_voice_volume %s", adev_set_voice_volume);
     adev->hw_device.set_master_volume = adev_set_master_volume;
+	ALOGI("adev_set_master_volume %s", adev_set_master_volume);
     adev->hw_device.set_mode = adev_set_mode;
+	ALOGI("adev_set_mode %s", adev_set_mode);
     adev->hw_device.set_mic_mute = adev_set_mic_mute;
+	ALOGI("adev_set_mic_mute %s", adev_set_mic_mute);
     adev->hw_device.get_mic_mute = adev_get_mic_mute;
+	ALOGI("adev_get_mic_mute %s", adev_get_mic_mute);
     adev->hw_device.set_parameters = adev_set_parameters;
+	ALOGI("adev_set_parameters %s", adev_set_parameters);
     adev->hw_device.get_parameters = adev_get_parameters;
+	ALOGI("adev_get_parameters %s", adev_get_parameters);
     adev->hw_device.get_input_buffer_size = adev_get_input_buffer_size;
+	ALOGI("adev_get_input_buffer_size %s", adev_get_input_buffer_size);
     adev->hw_device.open_output_stream = adev_open_output_stream;
+	ALOGI("adev_open_output_stream %s", adev_open_output_stream);
     adev->hw_device.close_output_stream = adev_close_output_stream;
+	ALOGI("adev_close_output_stream %s", adev_close_output_stream);
     adev->hw_device.open_input_stream = adev_open_input_stream;
+	ALOGI("adev_open_input_stream %s", adev_open_input_stream);
     adev->hw_device.close_input_stream = adev_close_input_stream;
+	ALOGI("adev_close_input_stream %s", adev_close_input_stream);
     adev->hw_device.dump = adev_dump;
+	ALOGI("adev_dump %s", adev_dump);
 
     adev->ar = audio_route_init(MIXER_CARD, NULL);
+	ALOGI("MIXER_CARD %s", MIXER_CARD);
     adev->orientation = ORIENTATION_UNDEFINED;
+	ALOGI("ORIENTATION_UNDEFINED %s", ORIENTATION_UNDEFINED);
     adev->out_device = AUDIO_DEVICE_OUT_SPEAKER;
+	ALOGI("AUDIO_DEVICE_OUT_SPEAKER %s", AUDIO_DEVICE_OUT_SPEAKER);
     adev->in_device = AUDIO_DEVICE_IN_BUILTIN_MIC & ~AUDIO_DEVICE_BIT_IN;
-
+	ALOGI("AUDIO_DEVICE_IN_BUILTIN_MIC %s", AUDIO_DEVICE_IN_BUILTIN_MIC);
+	
     *device = &adev->hw_device.common;
 
     select_devices(adev);

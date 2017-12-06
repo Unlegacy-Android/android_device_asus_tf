@@ -1176,14 +1176,18 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->hw_device.close_input_stream = adev_close_input_stream;
     adev->hw_device.dump = adev_dump;
 
+	ALOGI("before MIXER_CARD");
     adev->ar = audio_route_init(MIXER_CARD, NULL);
+	ALOGI("after MIXER_CARD");
     adev->orientation = ORIENTATION_UNDEFINED;
     adev->out_device = AUDIO_DEVICE_OUT_SPEAKER;
     adev->in_device = AUDIO_DEVICE_IN_BUILTIN_MIC & ~AUDIO_DEVICE_BIT_IN;
 
     *device = &adev->hw_device.common;
-
+	
+	ALOGI("before select_devices");
     select_devices(adev);
+	ALOGI("after select_devices");
 	
 	ALOGI("adev_open end");
 	

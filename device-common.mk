@@ -125,4 +125,3 @@ PRODUCT_COPY_FILES += \
 # Vendor blobs
 $(call inherit-product, vendor/asus/transformer/asus-vendor.mk)
 $(call inherit-product, vendor/broadcom/transformer/broadcom-vendor.mk)
-$(call inherit-product, vendor/invensense/transformer/invensense-vendor.mk)

@@ -94,7 +94,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     device/asus/transformer/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    device/asus/transformer/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+    device/asus/transformer/audio/tiny_hw.xml:system/etc/tiny_hw.xml
 
 # Audio debug
 PRODUCT_PACKAGES += \

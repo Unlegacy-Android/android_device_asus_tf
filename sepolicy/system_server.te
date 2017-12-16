@@ -2,5 +2,8 @@
 allow system_server gps_data_file:dir rw_dir_perms;
 allow system_server gps_data_file:fifo_file { setattr rw_file_perms create };
 
+# sensors permissions
+allow system_server device:chr_file { read write open };
+
 # text relocs
 #allow system_server system_file:file execmod;

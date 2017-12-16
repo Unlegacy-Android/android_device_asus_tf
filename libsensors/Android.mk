@@ -96,53 +96,6 @@ include $(BUILD_SHARED_LIBRARY)
 
 endif # BOARD_USES_INVENSENSE_GYRO
 
-include $(CLEAR_VARS)
-LOCAL_MODULE := libsensors.isl29018
-LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
-LOCAL_SRC_FILES := isl29018.cpp
-LOCAL_C_INCLUDES += $(LOCAL_PATH)
-LOCAL_SHARED_LIBRARIES := liblog libsensors.base
-LOCAL_CPPFLAGS+=-DLINUX=1
-LOCAL_PRELINK_MODULE := false
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := libsensors.isl29028
-LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
-LOCAL_SRC_FILES := isl29028.cpp
-LOCAL_C_INCLUDES += $(LOCAL_PATH)
-LOCAL_SHARED_LIBRARIES := liblog libsensors.base libsensors.isl29018
-LOCAL_CPPFLAGS+=-DLINUX=1
-LOCAL_PRELINK_MODULE := false
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := libsensors.ltr558als
-LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
-LOCAL_SRC_FILES := ltr558als.cpp
-LOCAL_C_INCLUDES += $(LOCAL_PATH)
-LOCAL_SHARED_LIBRARIES := liblog libsensors.base
-LOCAL_CPPFLAGS+=-DLINUX=1
-LOCAL_PRELINK_MODULE := false
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
-include $(BUILD_SHARED_LIBRARY)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := libsensors.lightsensor
-LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
-LOCAL_SRC_FILES := LightSensor.cpp
-LOCAL_C_INCLUDES += $(LOCAL_PATH)
-LOCAL_SHARED_LIBRARIES := liblog libsensors.base
-LOCAL_CPPFLAGS+=-DLINUX=1
-LOCAL_PRELINK_MODULE := false
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
-include $(BUILD_SHARED_LIBRARY)
-
 # HAL module implemenation, not prelinked and stored in
 # hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.board.platform>.so
 
@@ -150,16 +103,14 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := sensors.transformer
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
-LOCAL_SRC_FILES := sensors.cpp
+LOCAL_SRC_FILES := sensors.cpp LightSensor.cpp
 LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/mllite
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/linux
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include/linux
 LOCAL_SHARED_LIBRARIES := liblog libcutils libutils libdl \
-                          libsensors.base libsensors.mpl \
-                          libsensors.isl29028 libsensors.ltr558als \
-                          libsensors.lightsensor
+                          libsensors.base libsensors.mpl
 LOCAL_CPPFLAGS+=-DLINUX=1
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw

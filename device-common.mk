@@ -88,14 +88,11 @@ PRODUCT_COPY_FILES += \
 # Sensors HAL
 PRODUCT_PACKAGES += \
     sensors.transformer \
-    libinvensense_hal \
     libmllite \
     libmplmpu \
     libmlplatform \
     libsensors.base \
-    libsensors.mpl \
-    libsensors.isl29028 \
-    libsensors.ltr558als
+    libsensors.mpl
 
 # Audio
 PRODUCT_PACKAGES += \

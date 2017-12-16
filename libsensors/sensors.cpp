@@ -20,28 +20,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "isl29028.h"
-#include "ltr558als.h"
+#include "LightSensor.h"
 #include "MPLSensor.h"
 #include "MPLSensorDefs.h"
 #include "MPLSensorSysApi.h"
-
-#define LIGHT_SENSOR_NAME_SYSFS_PATH  "/sys/bus/iio/devices/device0/name"
-#define LIGHT_SENSOR_NAME_SYSFS_PATH_NEW  "/sys/bus/iio/devices/iio:device0/name"
-#define LUX_SYSFS_PATH  "/sys/bus/iio/devices/device0/als_value"
-#define LUX_SYSFS_PATH_NEW  "/sys/bus/iio/devices/iio:device0/als_value"
-#define LUX_ENABLE_SYSFS_PATH  "/sys/bus/iio/devices/device0/als_enable"
-#define LUX_ENABLE_SYSFS_PATH_NEW  "/sys/bus/iio/devices/iio:device0/als_enable"
-#define LUX_MODE_SYSFS_PATH  "/sys/bus/iio/devices/device0/als_ir_mode"
-#define LUX_MODE_SYSFS_PATH_NEW  "/sys/bus/iio/devices/iio:device0/als_ir_mode"
-#define PROX_SYSFS_PATH  "/sys/bus/iio/devices/device0/proximity_value"
-#define PROX_SYSFS_PATH_NEW  "/sys/bus/iio/devices/iio:device0/proximity_value"
-#define PROX_ENABLE_SYSFS_PATH  "/sys/bus/iio/devices/device0/proximity_enable"
-#define PROX_ENABLE_SYSFS_PATH_NEW  "/sys/bus/iio/devices/iio:device0/proximity_enable"
-
-/* Proxiimity distance to determine object is near or far from sensor device */
-#define PROX_THRESHOLD_ISL29028 4
-#define PROX_THRESHOLD_LTR558 675
 
 static const struct sensor_t sSensorList[] = {
       MPLROTATIONVECTOR_DEF,
@@ -51,10 +33,7 @@ static const struct sensor_t sSensorList[] = {
       MPLACCEL_DEF,
       MPLMAGNETICFIELD_DEF,
       MPLORIENTATION_DEF,
-      ISL29028LIGHT_DEF(ID_L),
-      ISL29028PROX_DEF(ID_P),
-      LTR_558ALS_DEF(ID_L),
-      LTR_558PS_DEF(ID_P),
+	  LIGHTSENSOR_DEF,
 };
 
 /*****************************************************************************/
@@ -83,7 +62,7 @@ struct sensors_module_t HAL_MODULE_INFO_SYM = {
                 version_major: 1,
                 version_minor: 0,
                 id: SENSORS_HARDWARE_MODULE_ID,
-                name: "Cardhu sensors module",
+                name: "Transformer sensors module",
                 author: "nvidia",
                 methods: &sensors_module_methods,
                 dso: NULL,
@@ -103,17 +82,16 @@ struct sensors_poll_context_t {
 
 private:
     enum {
-        light             = 0,
-        proximity         = 1,
-        mpl               = 2,
+        mpl               = 0,
         mpl_accel,
         mpl_timer,
+        light,
         numSensorDrivers,       // wake pipe goes here
         mpl_power,              //special handle for MPL pm interaction
         numFds,
     };
 
-    static const size_t wake = numFds - 2;
+    static const size_t wake = numSensorDrivers;
     static const char WAKE_MESSAGE = 'W';
     struct pollfd mPollFds[numFds];
     int mWritePipeFd;
@@ -131,9 +109,6 @@ private:
                 return mpl;
             case ID_L:
                 return light;
-
-            case ID_P:
-                return proximity;
         }
         return -EINVAL;
     }
@@ -172,50 +147,10 @@ sensors_poll_context_t::sensors_poll_context_t()
     mPollFds[mpl_timer].events = POLLIN;
     mPollFds[mpl_timer].revents = 0;
 
-    mPollFds[proximity].fd = -1;
-    mPollFds[light].fd = -1;
-    mSensors[light] = NULL;
-    mSensors[proximity] = NULL;
-
-    data_fd = open(LIGHT_SENSOR_NAME_SYSFS_PATH, O_RDONLY);
-    if (data_fd < 0) {
-        data_fd = open(LIGHT_SENSOR_NAME_SYSFS_PATH_NEW, O_RDONLY);
-        use_old_names = 0;
-    }
-
-    if (data_fd >= 0) {
-        read(data_fd, name, sizeof(name));
-        close(data_fd);
-
-       if (!strncmp(name, "isl29028", strlen("isl29028"))) {
-            if (use_old_names) {
-                mSensors[light] = new Isl29028Light(LUX_SYSFS_PATH, LUX_MODE_SYSFS_PATH, ID_L);
-                mSensors[proximity] = new Isl29028Prox(PROX_SYSFS_PATH, PROX_ENABLE_SYSFS_PATH,
-                                          ID_P, PROX_THRESHOLD_ISL29028);
-            } else {
-                mSensors[light] = new Isl29028Light(LUX_SYSFS_PATH_NEW, LUX_MODE_SYSFS_PATH_NEW, ID_L);
-                mSensors[proximity] = new Isl29028Prox(PROX_SYSFS_PATH_NEW, PROX_ENABLE_SYSFS_PATH_NEW,
-                                          ID_P, PROX_THRESHOLD_ISL29028);
-            }
-       }
-       else if (!strncmp(name, "LTR_558ALS", strlen("LTR_558ALS"))) {
-           if (use_old_names) {
-               mSensors[light] = new ltr558Light(LUX_SYSFS_PATH, LUX_ENABLE_SYSFS_PATH, ID_L);
-               mSensors[proximity] = new ltr558Prox(PROX_SYSFS_PATH, PROX_ENABLE_SYSFS_PATH,
-                                         ID_P, PROX_THRESHOLD_LTR558);
-           } else {
-               mSensors[light] = new ltr558Light(LUX_SYSFS_PATH_NEW, LUX_ENABLE_SYSFS_PATH_NEW, ID_L);
-               mSensors[proximity] = new ltr558Prox(PROX_SYSFS_PATH_NEW, PROX_ENABLE_SYSFS_PATH_NEW,
-                                         ID_P, PROX_THRESHOLD_LTR558);
-           }
-       }
-       else {
-            ALOGE("sensors_poll_context_t: Unsupported Light Sensor %s\n", name);
-       }
-    }
-    else {
-        ALOGE("sensors_poll_context_t:data_fd for als/proximity is invalid = %d\n", data_fd);
-    }
+    mSensors[light] = new LightSensor();
+    mPollFds[light].fd = mSensors[light]->getFd();
+    mPollFds[light].events = POLLIN;
+    mPollFds[light].revents = 0;
 
     int wakeFds[2];
     int result = pipe(wakeFds);

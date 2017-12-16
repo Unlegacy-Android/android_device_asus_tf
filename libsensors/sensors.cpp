@@ -1,8 +1,8 @@
 
 /*
  * Copyright (C) 2008 The Android Open Source Project
- *
  * Copyright (c) 2011-2012, NVIDIA CORPORATION.  All rights reserved.
+ * Copyright (С) 2017 Svyatoslav Ryhel
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ static const struct sensor_t sSensorList[] = {
       MPLACCEL_DEF,
       MPLMAGNETICFIELD_DEF,
       MPLORIENTATION_DEF,
-	  LIGHTSENSOR_DEF,
+      LIGHTSENSOR_DEF,
 };
 
 /*****************************************************************************/
@@ -53,22 +53,22 @@ static int sensors__get_sensors_list(struct sensors_module_t* module,
 }
 
 static struct hw_module_methods_t sensors_module_methods = {
-        open: open_sensors
+        .open = open_sensors,
 };
 
 struct sensors_module_t HAL_MODULE_INFO_SYM = {
-        common: {
-                tag: HARDWARE_MODULE_TAG,
-                version_major: 1,
-                version_minor: 0,
-                id: SENSORS_HARDWARE_MODULE_ID,
-                name: "Transformer sensors module",
-                author: "nvidia",
-                methods: &sensors_module_methods,
-                dso: NULL,
-                reserved: {0}
+        .common = {
+                .tag = HARDWARE_MODULE_TAG,
+                .module_api_version = SENSORS_MODULE_API_VERSION_0_1,
+                .hal_api_version = HARDWARE_HAL_API_VERSION,
+                .id = SENSORS_HARDWARE_MODULE_ID,
+                .name = "Transformer sensors module",
+                .author = "nvidia",
+                .methods = &sensors_module_methods,
+                .dso = NULL,
+                .reserved = {0}
         },
-        get_sensors_list: sensors__get_sensors_list,
+        .get_sensors_list = sensors__get_sensors_list,
 };
 
 struct sensors_poll_context_t {

@@ -46,10 +46,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
-# File that declares the MIFARE NFC constant
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/com.nxp.mifare.xml:system/etc/permissions/com.nxp.mifare.xml
-
 # Input device configs
 PRODUCT_COPY_FILES += \
     device/asus/transformer/touchscreen/elan-touchscreen.idc:system/usr/idc/elan-touchscreen.idc \
@@ -77,7 +73,6 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329
 
 # HALs
 PRODUCT_PACKAGES += \
-    audio.primary.grouper \
     lights.grouper
 
 # Sensors
@@ -91,8 +86,7 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default
 
 PRODUCT_COPY_FILES += \
-    device/asus/grouper/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    device/asus/grouper/audio/mixer_paths.xml:system/etc/mixer_paths.xml
+    device/asus/grouper/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

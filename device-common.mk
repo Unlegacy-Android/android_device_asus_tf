@@ -85,6 +85,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     device/asus/transformer/sensors/sensors-load-calibration.sh:system/bin/sensors-load-calibration.sh
 
+# Sensors HAL
+PRODUCT_PACKAGES += \
+    sensors.transformer \
+    libmllite \
+    libmplmpu \
+    libmlplatform \
+    libsensors.base \
+    libsensors.mpl
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.transformer \

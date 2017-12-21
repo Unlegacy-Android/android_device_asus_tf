@@ -1,6 +1,5 @@
 import init.tegra3.rc
 
-import init.transformer.sensors.rc
 import init.transformer.usb.rc
 
 on early-init
@@ -24,7 +23,7 @@ on fs
     mount_all /fstab.transformer
 
     mkdir /per 0700 root root
-    mount vfat /dev/block/platform/sdhci-tegra.3/by-name/PER /per ro context=u:object_r:oemfs:s0
+    mount vfat /dev/block/mmcblk0p5 /per ro context=u:object_r:oemfs:s0
 
 on post-fs-data
     # Set indication (checked by vold) that we have finished this action
@@ -60,6 +59,12 @@ on boot
     chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
     chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
 
+	# Sensor
+    chown system system /sys/devices/platform/tegra-i2c.2/i2c-2/2-000f/enable
+    chown system system /sys/devices/platform/tegra-i2c.2/i2c-2/2-000f/delay
+    chmod 777 /sys/devices/platform/tegra-i2c.2/i2c-2/2-000f/enable
+    chmod 777 /sys/devices/platform/tegra-i2c.2/i2c-2/2-000f/delay
+
     # GPS
     mkdir /data/gps 1770 gps system
     write /sys/class/gpio/export 162
@@ -79,6 +84,11 @@ on property:sys.boot_completed=1
     write /sys/block/mmcblk0/queue/rq_affinity 2
     # Disable entropy
     write /sys/block/mmcblk0/queue/add_random 0
+
+service sensors-calib /system/bin/sensors-load-calibration.sh
+    class main
+    user root
+    oneshot
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \

@@ -80,7 +80,15 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329
 PRODUCT_PACKAGES += \
     lights.transformer
 
-# Sensors
+# Sensors HAL
+PRODUCT_PACKAGES += \
+    sensors.transformer \
+    libmllite \
+    libmplmpu \
+    libmlplatform \
+    libsensors.base \
+    libsensors.mpl
+
 PRODUCT_COPY_FILES += \
     device/asus/transformer/sensors/sensors-load-calibration.sh:system/bin/sensors-load-calibration.sh
 

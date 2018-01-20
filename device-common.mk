@@ -105,13 +105,6 @@ PRODUCT_COPY_FILES += \
     device/asus/transformer/audio/audio_policy.conf:system/etc/audio_policy.conf \
     device/asus/transformer/audio/tiny_hw.xml:system/etc/tiny_hw.xml
 
-# Audio debug
-PRODUCT_PACKAGES += \
-   tinymix \
-   tinyplay \
-   tinycap \
-   tinypcminfo
-
 # Filesystem management tools
 PRODUCT_PACKAGES += \
     fsck.f2fs \

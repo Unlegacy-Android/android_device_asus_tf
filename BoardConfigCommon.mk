@@ -67,6 +67,10 @@ BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/asus/transformer/bluetooth
 # Sensors
 BOARD_USES_INVENSENSE_GYRO := INVENSENSE_MPU3050
 
+# Camera
+TARGET_USES_MEDIA_EXTENSIONS := true
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+
 # Dump State
 BOARD_HAL_STATIC_LIBRARIES := libdumpstate.transformer
 

@@ -45,6 +45,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
+# AsusDec
+PRODUCT_PACKAGES += \
+    AsusDec \
+    com.unlegacy.asusdec \
+    libasusdec_jni
+
 # Input device configs
 PRODUCT_COPY_FILES += \
     device/asus/transformer/touchscreen/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \

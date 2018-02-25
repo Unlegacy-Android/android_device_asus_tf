@@ -42,7 +42,9 @@ USE_CLANG_PLATFORM_BUILD := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=$(TARGET_BOOTLOADER_BOARD_NAME)
-TARGET_KERNEL_CONFIG := transformer_defconfig
+TARGET_KERNEL_CONFIG := tegra3_common_defconfig
+TARGET_KERNEL_VARIANT_CONFIG := transformer_defconfig
+TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
 TARGET_KERNEL_SOURCE := kernel/nvidia/tegra3
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-

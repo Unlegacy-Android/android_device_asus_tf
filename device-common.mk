@@ -102,7 +102,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     device/asus/transformer/audio/audio_policy.conf:system/etc/audio_policy.conf \
-    device/asus/transformer/audio/tiny_hw.xml:system/etc/tiny_hw.xml
+    device/asus/transformer/audio/tiny_hw_rt5631.xml:system/etc/tiny_hw_rt5631.xml \
+    device/asus/transformer/audio/tiny_hw_wm8903.xml:system/etc/tiny_hw_wm8903.xml
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

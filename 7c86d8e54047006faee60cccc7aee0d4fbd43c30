@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2af1b546_c0436ee9",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-05-17T09:48:53Z",
+      "side": 1,
+      "message": "Instead, do: `char file[32] \u003d { 0 };`.",
+      "range": {
+        "startLine": 1142,
+        "startChar": 4,
+        "endLine": 1142,
+        "endChar": 22
+      },
+      "revId": "7c86d8e54047006faee60cccc7aee0d4fbd43c30",
+      "serverId": "d5e41ece-075f-43fb-b5a6-48951f3d7b1d",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77f9efd4_7760f970",
+        "filename": "audio/audio_hw.c",
+        "patchSetId": 2
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2018-05-17T09:48:53Z",
+      "side": 1,
+      "message": "I\u0027d recommend reusing the already declared file object (`f`, line 1040).",
+      "range": {
+        "startLine": 1147,
+        "startChar": 10,
+        "endLine": 1147,
+        "endChar": 17
+      },
+      "revId": "7c86d8e54047006faee60cccc7aee0d4fbd43c30",
+      "serverId": "d5e41ece-075f-43fb-b5a6-48951f3d7b1d",
+      "unresolved": false
+    }
+  ]
+}

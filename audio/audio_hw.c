@@ -1139,10 +1139,38 @@ static int adev_config_parse(struct tiny_audio_device *adev)
     struct config_parse_state s;
     FILE *f;
     XML_Parser p;
-    char file[] = "/system/etc/tiny_hw.xml";
+    char file[32] = { 0 };
+    char project_id[16] = { 0 };
     int ret = 0;
     bool eof = false;
     int len;
+
+    f = fopen("/sys/devices/platform/cardhu_misc/cardhu_projectid", "r");
+    if (!f) {
+        ALOGE("Failed to read sysfs %s", strerror(errno));
+        return -ENODEV;
+    }
+
+    fscanf(f, "%s", project_id);
+    fclose(f);
+
+    switch(atoi(project_id)) {
+
+        case 0x00:  // TF201
+        case 0x03:  // TF300TG
+        case 0x04:  // TF700T
+        case 0x05:  // TF300TL
+            file = "/system/etc/tiny_hw_rt5631.xml";
+            break;
+
+        case 0x02:  // TF300T
+            file = "/system/etc/tiny_hw_wm8903.xml";
+            break;
+
+        default:
+            ALOGE("Unsupported project id");
+            return -ENODEV;
+    }
 
     ALOGV("Reading configuration from %s\n", file);
     f = fopen(file, "r");

@@ -18,7 +18,6 @@
  */
 
 #define LOG_TAG "tiny_hw"
-#define LOG_NDEBUG 0
 
 #include <errno.h>
 #include <pthread.h>

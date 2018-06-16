@@ -42,6 +42,8 @@
 #define PCM_DEVICE_SCO 2
 
 #define MIXER_CARD 1
+#define MIXER_RT5631 "/system/etc/mixer_rt5631.xml"
+#define MIXER_WM8903 "/system/etc/mixer_wm8903.xml"
 
 #define OUT_PERIOD_SIZE 512
 #define OUT_SHORT_PERIOD_COUNT 2
@@ -1141,6 +1143,29 @@ static int adev_close(hw_device_t *device)
     return 0;
 }
 
+static int device_switch(void)
+{
+    FILE *f;
+    char project_id[16] = { 0 };
+    int ret = -1;
+
+    ALOGV("device_switch  +++\n");
+
+    f = fopen("/sys/devices/platform/cardhu_misc/cardhu_projectid", "r");
+    if (!f) {
+        ALOGE("Failed to read sysfs %s", strerror(errno));
+        return -ENODEV;
+    }
+
+    fscanf(f, "%s", project_id);
+    fclose(f);
+
+    ret = atoi(project_id);
+
+    ALOGV("device_switch  ---\n");
+    return ret;
+}
+
 static int adev_open(const hw_module_t* module, const char* name,
                      hw_device_t** device)
 {
@@ -1174,7 +1199,28 @@ static int adev_open(const hw_module_t* module, const char* name,
     adev->hw_device.close_input_stream = adev_close_input_stream;
     adev->hw_device.dump = adev_dump;
 
-    adev->ar = audio_route_init(MIXER_CARD, NULL);
+    ALOGV("Defining device\n");
+
+    switch(device_switch()) {
+        case 0x00:  // TF201
+        case 0x03:  // TF300TG
+        case 0x04:  // TF700T
+        case 0x05:  // TF300TL
+            ALOGV("Device supports RT5631 chip\n");
+            adev->ar = audio_route_init(MIXER_CARD, MIXER_RT5631);
+            break;
+
+        case 0x02:  // TF300T
+            ALOGV("Device supports WM8903 chip\n");
+            adev->ar = audio_route_init(MIXER_CARD, MIXER_WM8903);
+            break;
+
+        default:
+            ALOGE("Unsupported project id");
+            adev->ar = audio_route_init(MIXER_CARD, NULL);
+//            return -ENODEV;
+    }
+
     adev->orientation = ORIENTATION_UNDEFINED;
     adev->out_device = AUDIO_DEVICE_OUT_SPEAKER;
     adev->in_device = AUDIO_DEVICE_IN_BUILTIN_MIC & ~AUDIO_DEVICE_BIT_IN;

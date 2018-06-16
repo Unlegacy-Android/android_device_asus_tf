@@ -37,11 +37,11 @@
 #include <audio_utils/resampler.h>
 #include <audio_route/audio_route.h>
 
-#define PCM_CARD 0
+#define PCM_CARD 1
 #define PCM_DEVICE 0
 #define PCM_DEVICE_SCO 2
 
-#define MIXER_CARD 0
+#define MIXER_CARD 1
 
 #define OUT_PERIOD_SIZE 512
 #define OUT_SHORT_PERIOD_COUNT 2
@@ -1195,7 +1195,7 @@ struct audio_module HAL_MODULE_INFO_SYM = {
         .module_api_version = AUDIO_MODULE_API_VERSION_0_1,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = AUDIO_HARDWARE_MODULE_ID,
-        .name = "Grouper audio HW HAL",
+        .name = "Transformer audio HW HAL",
         .author = "The Android Open Source Project",
         .methods = &hal_module_methods,
     },

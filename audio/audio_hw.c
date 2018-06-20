@@ -45,6 +45,9 @@
 #define MIXER_RT5631 "/system/etc/mixer_rt5631.xml"
 #define MIXER_WM8903 "/system/etc/mixer_wm8903.xml"
 
+#define HDMI_CARD 0
+#define HDMI_DEVICE 3
+
 #define OUT_PERIOD_SIZE 512
 #define OUT_SHORT_PERIOD_COUNT 2
 #define OUT_LONG_PERIOD_COUNT 8
@@ -251,7 +254,7 @@ static void do_in_standby(struct stream_in *in)
 static int start_output_stream(struct stream_out *out)
 {
     struct audio_device *adev = out->dev;
-    unsigned int device;
+    unsigned int device, card;
     int ret;
 
     /*
@@ -261,9 +264,15 @@ static int start_output_stream(struct stream_out *out)
      * the same time.
      */
     if (adev->out_device & AUDIO_DEVICE_OUT_ALL_SCO) {
+        card = PCM_CARD;
         device = PCM_DEVICE_SCO;
         out->pcm_config = &pcm_config_sco;
+    } else if (adev->out_device & AUDIO_DEVICE_OUT_AUX_DIGITAL) {
+        card = HDMI_CARD;
+        device = HDMI_DEVICE;
+        out->pcm_config = &pcm_config_out;
     } else {
+        card = PCM_CARD;
         device = PCM_DEVICE;
         out->pcm_config = &pcm_config_out;
     }
@@ -286,7 +295,7 @@ static int start_output_stream(struct stream_out *out)
         pthread_mutex_unlock(&in->lock);
     }
 
-    out->pcm = pcm_open(PCM_CARD, device, PCM_OUT | PCM_NORESTART | PCM_MONOTONIC, out->pcm_config);
+    out->pcm = pcm_open(card, device, PCM_OUT | PCM_NORESTART | PCM_MONOTONIC, out->pcm_config);
 
     if (out->pcm && !pcm_is_ready(out->pcm)) {
         ALOGE("pcm_open(out) failed: %s", pcm_get_error(out->pcm));

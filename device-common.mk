@@ -126,6 +126,10 @@ PRODUCT_COPY_FILES += \
     device/asus/transformer/media/media_profiles.xml:system/etc/media_profiles.xml \
     device/asus/transformer/media/media_codecs.xml:system/etc/media_codecs.xml
 
+# Camera
+PRODUCT_PACKAGES += \
+    libimager_shim
+
 # Vendor blobs
 $(call inherit-product, vendor/asus/transformer/asus-vendor.mk)
 $(call inherit-product, vendor/broadcom/transformer/broadcom-vendor.mk)

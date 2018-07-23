@@ -13,6 +13,7 @@
 # limitations under the License.
 
 include hardware/nvidia/tegra3/BoardConfigCommon.mk
+TARGET_OTA_ASSERT_DEVICE := transformer,TF201,TF300T,TF700T,TF201T,tf201,tf300t,tf700t,tf201t
 
 TARGET_BOOTLOADER_BOARD_NAME := transformer
 TARGET_NO_BOOTLOADER := true

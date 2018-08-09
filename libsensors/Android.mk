@@ -27,7 +27,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/linux
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include/linux
 LOCAL_SHARED_LIBRARIES := liblog libdl libcutils libutils
-LOCAL_CPPFLAGS+=-DLINUX=1
+LOCAL_CPPFLAGS += -DLINUX=1 -Wall -Werror
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
 include $(BUILD_SHARED_LIBRARY)
@@ -82,12 +82,12 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include/linux
 LOCAL_SRC_FILES := MPLSensorSysApi.cpp MPLSensor.cpp
 LOCAL_SHARED_LIBRARIES := liblog libcutils libutils libdl libsensors.base libmllite libmlplatform libmplmpu
-LOCAL_CPPFLAGS+=-DLINUX=1
+LOCAL_CPPFLAGS += -DLINUX=1 -Wall -Werror
 ifeq	($(BOARD_USES_INVENSENSE_GYRO),INVENSENSE_MPU3050)
-LOCAL_CPPFLAGS+=-DPLATFORM_H=\"mpu3050.h\"
+LOCAL_CPPFLAGS += -DPLATFORM_H=\"mpu3050.h\"
 endif # INVENSENSE_MPU3050
 ifeq	($(BOARD_USES_INVENSENSE_GYRO),INVENSENSE_MPU6050)
-LOCAL_CPPFLAGS+=-DPLATFORM_H=\"mpu6050b1.h\"
+LOCAL_CPPFLAGS += -DPLATFORM_H=\"mpu6050b1.h\"
 endif # INVENSENSE_MPU6050
 LOCAL_CPPFLAGS += -DMPL_LIB_NAME=\"libmplmpu.so\"
 LOCAL_CPPFLAGS += -DAICHI_LIB_NAME=\"libami.so\"
@@ -112,7 +112,7 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include/linux
 LOCAL_SHARED_LIBRARIES := liblog libcutils libutils libdl \
                           libsensors.base libsensors.mpl
-LOCAL_CPPFLAGS+=-DLINUX=1
+LOCAL_CPPFLAGS += -DLINUX=1 -Wall -Werror
 LOCAL_PRELINK_MODULE := false
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 include $(BUILD_SHARED_LIBRARY)

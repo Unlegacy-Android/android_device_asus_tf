@@ -126,3 +126,27 @@ int SensorBase::openInput(const char* inputName) {
     ALOGE_IF(fd<0, "couldn't find '%s' input device", inputName);
     return fd;
 }
+
+int SensorBase::batch(int handle, int flags __unused,
+    int64_t period_ns, int64_t timeout __unused)
+{
+    int sensor_index = get_sensor_index_from_handle(handle);
+    int maxDelay = global_sensors_list[sensor_index].maxDelay;
+    int minDelay = global_sensors_list[sensor_index].minDelay;
+    if (period_ns < minDelay) {
+        period_ns = minDelay;
+    } else if (period_ns > maxDelay * 1000) {
+        period_ns = maxDelay * 1000;
+    }
+
+    ALOGV("%s: handle=%d type=%d maxDelay=%d minDelay=%d, delay set to %lld",
+        __func__, handle, global_sensors_list[sensor_index].type,
+        maxDelay, minDelay, period_ns);
+
+    return setDelay(handle, period_ns);
+}
+
+int SensorBase::flush(int handle __unused)
+{
+    return -EINVAL;
+}

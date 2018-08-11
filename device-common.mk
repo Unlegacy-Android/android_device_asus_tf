@@ -97,6 +97,8 @@ PRODUCT_COPY_FILES += \
 
 # Audio HAL
 PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
     audio.primary.transformer \
     audio.a2dp.default \
     audio.usb.default \
@@ -106,8 +108,8 @@ PRODUCT_PACKAGES += \
 USE_XML_AUDIO_POLICY_CONF := 1
 
 PRODUCT_COPY_FILES += \
-    device/asus/transformer/audio/mixer_rt5631.xml:system/etc/mixer_rt5631.xml \
-    device/asus/transformer/audio/mixer_wm8903.xml:system/etc/mixer_wm8903.xml \
+    device/asus/transformer/audio/mixer_rt5631.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_rt5631.xml \
+    device/asus/transformer/audio/mixer_wm8903.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_wm8903.xml \
     device/asus/transformer/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \

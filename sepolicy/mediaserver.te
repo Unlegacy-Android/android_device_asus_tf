@@ -3,3 +3,6 @@
 
 # camera HAL1
 allow mediaserver video_device:chr_file rw_file_perms;
+
+# operate tegra_camera
+allow mediaserver camera_device:chr_file rw_file_perms;

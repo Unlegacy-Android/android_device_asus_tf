@@ -70,6 +70,7 @@ PRODUCT_COPY_FILES += \
     device/asus/transformer/wifi/nvram_nh665.txt:system/etc/nvram_nh665.txt
 
 PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
     libwpa_client \
     hostapd \
     wificond \

@@ -1,0 +1,14 @@
+# gpsd - GPS daemon
+type gpsd, domain;
+type gps_exec, exec_type, file_type;
+
+init_daemon_domain(gps)
+net_domain(gps)
+
+###
+### neverallow
+###
+
+# gpsd can never have capabilities other than block_suspend
+neverallow gpsd self:capability *;
+neverallow gpsd self:capability2 ~block_suspend;

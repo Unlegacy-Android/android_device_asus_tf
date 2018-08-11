@@ -9,6 +9,7 @@
 
 # System and vendor files
 /system/vendor/bin/sensors\.tegra                            u:object_r:sensors_exec:s0
+/system/vendor/bin/gpsd                                      u:object_r:gpsd_exec:s0
 
 # Sysfs files
 /sys/class/gpio/gpio162/value                                u:object_r:sysfs_gps_writable:s0
@@ -19,6 +20,7 @@
 
 # Data files
 /data/cal.bin                                                u:object_r:sensors_data_file:s0
+/data/gps(/.*)?                                              u:object_r:gps_data_file:s0
 
 # Block devices
 /dev/block/mmcblk0                                           u:object_r:root_block_device:s0

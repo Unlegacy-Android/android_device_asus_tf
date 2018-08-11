@@ -1,0 +1,4 @@
+allow audioserver video_device:chr_file rw_file_perms;
+
+# Read projectid to define transformer model
+allow audioserver sysfs:file r_file_perms;

@@ -1,5 +1,5 @@
-# text relocs in nvidia things
+# Text relocs in nvidia things
 #allow mediaserver system_file:file execmod;
 
-# camera HAL1
+# Camera HAL1
 allow mediaserver video_device:chr_file rw_file_perms;

@@ -126,3 +126,19 @@ int SensorBase::openInput(const char* inputName) {
     ALOGE_IF(fd<0, "couldn't find '%s' input device", inputName);
     return fd;
 }
+
+int SensorBase::enable(int32_t handle __unused, int enabled __unused)
+{
+    return 0;
+}
+
+int SensorBase::batch(int handle, int flags __unused,
+    int64_t period_ns, int64_t timeout __unused)
+{
+    return setDelay(handle, period_ns);
+}
+
+int SensorBase::flush(int handle __unused)
+{
+    return -EINVAL;
+}

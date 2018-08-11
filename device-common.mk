@@ -86,10 +86,12 @@ PRODUCT_PACKAGES += \
 
 # Lights HAL
 PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-service \
     lights.transformer
 
 # Sensors HAL
 PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-service \
     sensors.transformer \
     libmllite \
     libmplmpu \

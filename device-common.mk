@@ -81,6 +81,7 @@ $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329
 
 # Lights HAL
 PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
     lights.transformer
 
 # Sensors HAL

@@ -54,6 +54,7 @@ on boot
 
     # Backlight
     chown system system /sys/class/backlight/pwm-backlight/brightness
+    chown system system /sys/class/backlight/pwm-backlight/low_persistence
 
     # DIDIM
     chown system system /sys/class/graphics/fb0/device/smartdimmer/enable

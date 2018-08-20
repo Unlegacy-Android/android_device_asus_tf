@@ -133,6 +133,12 @@ PRODUCT_COPY_FILES += \
     device/asus/transformer/media/media_profiles.xml:system/etc/media_profiles.xml \
     device/asus/transformer/media/media_codecs.xml:system/etc/media_codecs.xml
 
+# HIDL
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.gnss@1.0-impl
+
 # Vendor blobs
 $(call inherit-product, vendor/asus/transformer/asus-vendor.mk)
 $(call inherit-product, vendor/broadcom/transformer/broadcom-vendor.mk)

@@ -128,6 +128,17 @@ PRODUCT_COPY_FILES += \
     device/asus/transformer/media/media_profiles.xml:system/etc/media_profiles.xml \
     device/asus/transformer/media/media_codecs.xml:system/etc/media_codecs.xml
 
+# HIDL
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    android.hardware.light@2.0-impl \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.sensors@1.0-impl \
+    android.hardware.vibrator@1.0-impl \
+    android.hardware.usb@1.0-impl \
+    android.hardware.memtrack@1.0-impl
+
 # Vendor blobs
 $(call inherit-product, vendor/asus/transformer/asus-vendor.mk)
 $(call inherit-product, vendor/broadcom/transformer/broadcom-vendor.mk)

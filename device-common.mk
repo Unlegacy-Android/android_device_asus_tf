@@ -100,7 +100,7 @@ PRODUCT_PACKAGES += \
     libsensors.mpl
 
 PRODUCT_COPY_FILES += \
-    device/asus/transformer/sensors/sensors-load-calibration.sh:system/bin/sensors-load-calibration.sh
+    device/asus/transformer/sensors/sensors-load-calibration.sh:$(TARGET_COPY_OUT_VENDOR)/bin/sensors-load-calibration.sh
 
 # Audio HAL
 PRODUCT_PACKAGES += \

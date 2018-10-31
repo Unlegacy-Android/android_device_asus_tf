@@ -100,14 +100,17 @@ int SensorBase::openInput(const char* inputName) {
         return -1;
     strcpy(devname, dirname);
     filename = devname + strlen(devname);
-    *filename++ = '/';
+    *filename++ = '/'
+    ALOGI("104: filename is %s\n", *filename);
     while((de = readdir(dir))) {
         if(de->d_name[0] == '.' &&
                 (de->d_name[1] == '\0' ||
                         (de->d_name[1] == '.' && de->d_name[2] == '\0')))
             continue;
         strcpy(filename, de->d_name);
+        ALOGI("111: filename is %s\n", *filename);
         fd = open(devname, O_RDONLY);
+        ALOGI("113: fd is %d; devname is %s\n", fd, devname);
         if (fd>=0) {
             char name[80];
             if (ioctl(fd, EVIOCGNAME(sizeof(name) - 1), &name) < 1) {

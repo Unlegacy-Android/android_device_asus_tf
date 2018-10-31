@@ -123,7 +123,7 @@ int SensorBase::openInput(const char* inputName) {
         }
     }
     closedir(dir);
-    ALOGE_IF(fd<0, "couldn't find '%s' input device", inputName);
+    ALOGE_IF(fd<0, "couldn't find '%s' input device: %s", inputName, strerror(errno));
     return fd;
 }
 

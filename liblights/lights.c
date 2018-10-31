@@ -32,8 +32,10 @@
 
 static pthread_once_t g_init = PTHREAD_ONCE_INIT;
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
+static int g_last_backlight_mode = BRIGHTNESS_MODE_USER;
 
 #define BRIGHTNESS_FILE "/sys/class/backlight/pwm-backlight/brightness"
+#define PERSISTENCE_FILE "/sys/class/backlight/pwm-backlight/low_persistence"
 
 /**
  * device methods
@@ -80,12 +82,25 @@ static int set_light_backlight(struct light_device_t *dev,
 {
 	int err = 0;
 	int brightness = rgb_to_brightness(state);
+	unsigned int lpEnabled =
+		state->brightnessMode == BRIGHTNESS_MODE_LOW_PERSISTENCE;
 
 	if(!dev)
 		return -1;
 
 	pthread_mutex_lock(&g_lock);
 
+	// If we're not in lp mode and it has been enabled or if we are in lp mode
+	// and it has been disabled send an ioctl to the display with the update
+	if ((g_last_backlight_mode != state->brightnessMode && lpEnabled) ||
+		(!lpEnabled && g_last_backlight_mode == BRIGHTNESS_MODE_LOW_PERSISTENCE)) {
+		if ((err = write_int(PERSISTENCE_FILE, lpEnabled)) != 0) {
+			ALOGE("%s: Failed to write to %s: %s\n", __FUNCTION__, PERSISTENCE_FILE,
+				strerror(errno));
+		}
+	}
+
+	g_last_backlight_mode = state->brightnessMode;
 
 	if (!err)
 		err = write_int(BRIGHTNESS_FILE, brightness);
@@ -133,7 +148,7 @@ static int open_lights(const struct hw_module_t *module, char const *name,
 	memset(dev, 0, sizeof(*dev));
 
 	dev->common.tag = HARDWARE_DEVICE_TAG;
-	dev->common.version = 0;
+	dev->common.version = LIGHTS_DEVICE_API_VERSION_2_0;
 	dev->common.module = (struct hw_module_t *)module;
 	dev->common.close = (int (*)(struct hw_device_t *))close_lights;
 	dev->set_light = set_light;

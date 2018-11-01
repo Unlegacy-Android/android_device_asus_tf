@@ -1,0 +1,15 @@
+type sensors, domain;
+type sensors_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(sensors)
+
+# Allow using 'cat'
+#allow sensors_load_calibration shell_exec:file rx_file_perms;
+
+# Allow reading calibration data from /per
+allow sensors oemfs:dir r_dir_perms;
+allow sensors oemfs:file r_file_perms;
+
+# Allow writing calibration data
+allow sensors sysfs_sensors_writable:file w_file_perms;

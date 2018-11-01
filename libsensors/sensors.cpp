@@ -24,6 +24,7 @@
 #include "MPLSensor.h"
 #include "MPLSensorDefs.h"
 #include "MPLSensorSysApi.h"
+#include "SensorUtil.h"
 
 static const struct sensor_t sSensorList[] = {
       MPLROTATIONVECTOR_DEF,
@@ -346,6 +347,8 @@ static int open_sensors(const struct hw_module_t* module, const char* id,
     FUNC_LOG;
     int status = -EINVAL;
     sensors_poll_context_t *dev = new sensors_poll_context_t();
+
+    calibrateSensor(LIGHT_INI, LIGHT_CAL);
 
     memset(&dev->device, 0, sizeof(sensors_poll_device_1));
 

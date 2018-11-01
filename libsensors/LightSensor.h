@@ -26,6 +26,9 @@
 #include "SensorBase.h"
 #include "InputEventReader.h"
 
+#define LIGHT_INI "/per/lightsensor/AL3010_Config.ini"
+#define LIGHT_CAL "/sys/devices/platform/tegra-i2c.2/i2c-2/2-001c/calibration"
+
 #define LIGHTSENSOR_DEF {                     \
     "AL3010 Ambient Light",                   \
     "Lite-On",                                \

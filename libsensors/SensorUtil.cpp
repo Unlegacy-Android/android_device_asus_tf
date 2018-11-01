@@ -62,3 +62,32 @@ int writeIntToFile(const char *path, unsigned int val)
     }
     return 1;
 }
+
+int calibrateSensor(const char *path1, const char *path2)
+{
+    char buffer[20] = {0};
+    int file, err;
+
+	/* Read values from calibration file */
+    file = open(path1, O_RDONLY);
+    if (file < 0)
+        return 0;
+
+    err = read(file, buffer, sizeof(buffer));
+    close(file);
+    if (err <= 0)
+        return -EIO;
+
+	/* Apply values to device */
+    file = open(path2, O_RDWR);
+    if (file < 0) {
+        return -ENOENT;
+    }
+
+    err = write(file, buffer, sizeof(buffer));
+    close(file);
+    if (err <= 0)
+        return -EIO;
+	
+    return 0;
+}

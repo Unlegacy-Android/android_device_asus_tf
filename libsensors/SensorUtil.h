@@ -33,4 +33,12 @@ int readIntFromFile(const char *path, unsigned int *val);
  */
 int writeIntToFile(const char *path, unsigned int val);
 
+/**
+ * Moves calibration data from one file to another.
+ *
+ * @return 0 in case of success or if no initial
+ * calibration file found.
+ */
+int calibrateSensor(const char *path1, const char *path2);
+
 #endif

@@ -18,6 +18,7 @@ LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libsensors.base
+LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
 LOCAL_SRC_FILES := SensorBase.cpp SensorUtil.cpp InputEventReader.cpp
@@ -28,42 +29,40 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include/linux
 LOCAL_SHARED_LIBRARIES := liblog libdl libcutils libutils
 LOCAL_CPPFLAGS+=-DLINUX=1
-LOCAL_PRELINK_MODULE := false
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libmplmpu
-LOCAL_SRC_FILES := /prebuilt/libmplmpu.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/prebuilt/libmplmpu.so
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := invensense
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
+LOCAL_PROPRIETARY_MODULE := true
 OVERRIDE_BUILT_MODULE_PATH := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)
 LOCAL_STRIP_MODULE := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libmllite
-LOCAL_SRC_FILES := /prebuilt/libmllite.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/prebuilt/libmllite.so
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := invensense
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
+LOCAL_PROPRIETARY_MODULE := true
 OVERRIDE_BUILT_MODULE_PATH := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)
 LOCAL_STRIP_MODULE := true
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libmlplatform
-LOCAL_SRC_FILES := /prebuilt/libmlplatform.so
+LOCAL_SRC_FILES := $(LOCAL_PATH)/prebuilt/libmlplatform.so
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_OWNER := invensense
 LOCAL_MODULE_SUFFIX := .so
 LOCAL_MODULE_CLASS := SHARED_LIBRARIES
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
+LOCAL_PROPRIETARY_MODULE := true
 OVERRIDE_BUILT_MODULE_PATH := $(TARGET_OUT_INTERMEDIATE_LIBRARIES)
 LOCAL_STRIP_MODULE := true
 include $(BUILD_PREBUILT)
@@ -72,6 +71,7 @@ ifneq (,$(filter $(BOARD_USES_INVENSENSE_GYRO),INVENSENSE_MPU3050 INVENSENSE_MPU
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libsensors.mpl
+LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
 LOCAL_CFLAGS += -std=gnu++0x
@@ -90,18 +90,17 @@ ifeq	($(BOARD_USES_INVENSENSE_GYRO),INVENSENSE_MPU6050)
 LOCAL_CPPFLAGS+=-DPLATFORM_H=\"mpu6050b1.h\"
 endif # INVENSENSE_MPU6050
 LOCAL_CPPFLAGS += -DMPL_LIB_NAME=\"libmplmpu.so\"
-LOCAL_CPPFLAGS += -DAICHI_LIB_NAME=\"libami.so\"
-LOCAL_PRELINK_MODULE := false
-LOCAL_MODULE_PATH := $(TARGET_OUT)/lib
 include $(BUILD_SHARED_LIBRARY)
 
 endif # BOARD_USES_INVENSENSE_GYRO
 
-# HAL module implemenation, not prelinked and stored in
+# HAL module implemenation stored in
 # hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.board.platform>.so
 
 include $(CLEAR_VARS)
-LOCAL_MODULE := sensors.transformer
+LOCAL_MODULE := sensors.$(TARGET_BOOTLOADER_BOARD_NAME)
+LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_PROPRIETARY_MODULE := true
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
 LOCAL_SRC_FILES := sensors.cpp LightSensor.cpp
@@ -113,6 +112,4 @@ LOCAL_C_INCLUDES += $(LOCAL_PATH)/mlsdk/platform/include/linux
 LOCAL_SHARED_LIBRARIES := liblog libcutils libutils libdl \
                           libsensors.base libsensors.mpl
 LOCAL_CPPFLAGS+=-DLINUX=1
-LOCAL_PRELINK_MODULE := false
-LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 include $(BUILD_SHARED_LIBRARY)

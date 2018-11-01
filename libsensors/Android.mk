@@ -32,6 +32,15 @@ LOCAL_CPPFLAGS+=-DLINUX=1
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := sensors
+LOCAL_SRC_FILES := /calibration/sensors.tegra
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_SUFFIX := .tegra
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/bin
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := libmplmpu
 LOCAL_SRC_FILES := /prebuilt/libmplmpu.so
 LOCAL_MODULE_TAGS := optional

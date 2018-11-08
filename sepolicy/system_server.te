@@ -4,3 +4,5 @@ allow system_server gps_data_file:fifo_file { setattr rw_file_perms create };
 
 # text relocs
 #allow system_server system_file:file execmod;
+
+allow system_server nvhost_device:chr_file rw_file_perms;

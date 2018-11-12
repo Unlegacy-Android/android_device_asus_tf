@@ -96,6 +96,10 @@ PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-impl \
     android.hardware.vibrator@1.0-service
 
+# USB
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
 # Keystore HAL
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-service

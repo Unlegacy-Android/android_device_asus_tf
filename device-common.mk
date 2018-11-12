@@ -66,10 +66,12 @@ PRODUCT_PACKAGES += \
 # Wi-Fi
 PRODUCT_COPY_FILES += \
     device/asus/transformer/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
+    device/asus/transformer/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     device/asus/transformer/wifi/nvram_nh615.txt:$(TARGET_COPY_OUT_VENDOR)/etc/nvram_nh615.txt \
     device/asus/transformer/wifi/nvram_nh665.txt:$(TARGET_COPY_OUT_VENDOR)/etc/nvram_nh665.txt
 
 PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
     libwpa_client \
     hostapd \
     wificond \

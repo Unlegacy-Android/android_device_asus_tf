@@ -1,0 +1,2 @@
+# Read projectid to define transformer model
+allow audioserver sysfs:file r_file_perms;

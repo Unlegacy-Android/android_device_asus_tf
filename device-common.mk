@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, hardware/nvidia/tegra3/tegra3.mk)
+$(call inherit-product-if-exists, hardware/nvidia/tegra3/tegra3.mk)
 
 PRODUCT_CHARACTERISTICS := tablet
 
@@ -130,5 +130,5 @@ PRODUCT_COPY_FILES += \
     device/asus/transformer/media/media_codecs.xml:system/etc/media_codecs.xml
 
 # Vendor blobs
-$(call inherit-product, vendor/asus/transformer/asus-vendor.mk)
-$(call inherit-product, vendor/broadcom/transformer/broadcom-vendor.mk)
+$(call inherit-product-if-exists, vendor/asus/transformer/asus-vendor.mk)
+$(call inherit-product-if-exists, vendor/broadcom/transformer/broadcom-vendor.mk)

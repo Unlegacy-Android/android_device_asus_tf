@@ -79,6 +79,10 @@ PRODUCT_PACKAGES += \
 WIFI_BAND := 802_11_BG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
 
+# Bluetooth
+PRODUCT_COPY_FILES += \
+    device/asus/transformer/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
 # Lights HAL
 PRODUCT_PACKAGES += \
     lights.transformer

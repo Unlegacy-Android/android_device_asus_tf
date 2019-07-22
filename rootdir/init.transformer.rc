@@ -68,9 +68,9 @@ on boot
     write /sys/class/gpio/export 162
     write /sys/class/gpio/gpio162/value 0
     write /sys/class/gpio/gpio162/direction out
-    chown gps system /sys/class/gpio/gpio162/value
+    chown gps gps /sys/class/gpio/gpio162/value
     chmod 0644 /sys/class/gpio/gpio162/value
-    chown gps system /dev/ttyHS1
+    chown gps gps /dev/ttyHS1
     chmod 0660 /dev/ttyHS1
 
 on property:sys.boot_completed=1
@@ -148,11 +148,11 @@ service bugreport /system/bin/dumpstate -d -p -B \
     oneshot
     keycodes 115 114
 
-service gpsd /vendor/bin/gpsd -c /system/etc/gps.xml
-    class main
+service gps-daemon /vendor/bin/gpsd -c /vendor/etc/gps.xml
+    class late_start
     socket gps seqpacket 0660 gps system
     user gps
-    group system wakelock inet sdcard_rw
+    group system inet sdcard_rw sdcard_r
 
 on property:sys.shutdown.requested=1recovery
     start recoveryd
